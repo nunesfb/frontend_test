@@ -30,7 +30,7 @@ class DeletarUsuario extends Component {
         })
             .then(data => {
                 if (data.ok) {
-                    console.log(data)
+                    //console.log(data)
                     this.setState({ redirect: true });
                 }
             })

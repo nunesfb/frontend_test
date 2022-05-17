@@ -36,16 +36,14 @@ class CriarUsuario extends Component {
 
         api.post('/users', {
             id: parseInt(id), name, age: parseInt(age), phone, email, username
-        })
-            .then(response => {
-                console.log(response)
-                if (response.data.message === "Insert OK") {
-                    this.setState({ redirect: true });
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        }).then(response => {
+            console.log(response)
+            if (response.data.message === "Insert OK") {
+                this.setState({ redirect: true });
+            }
+        }).catch(function (error) {
+            console.log(error.message);
+        });
     };
 
     render() {

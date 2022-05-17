@@ -39,23 +39,21 @@ class EditarUsuario extends Component {
         }));
     };
 
-    handleSubmit = event => {
-        event.preventDefault();
-        const { id } = this.props.match.params;
-        const { usuario: { name, age, phone, email, username } } = this.state;
+    handleSubmit = async event => {
+        try {
+            event.preventDefault();
+            const { id } = this.props.match.params;
+            const { usuario: { name, age, phone, email, username } } = this.state;
 
-        api.put(`/users/${id}`, {
-            id: parseInt(id), name, age: parseInt(age), phone, email, username
-        })
-            .then(response => {
-                console.log(response)
-                if (response.status === 204) {
-                    this.setState({ redirect: true });
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+            const response = await api.put(`/users/${id}`, { id: parseInt(id), name, age: parseInt(age), phone, email, username });
+
+            if (response.status === 204) {
+                this.setState({ redirect: true });
+            }
+        } catch (error) {
+            console.log(error.response.data);
+            return;
+        }
     };
 
     render() {
